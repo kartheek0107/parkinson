@@ -1,0 +1,21 @@
+project:
+  name: "DQLCT_Parkinsons_Detection"
+  seed: 42
+
+data:
+  raw_path: "./data/raw"
+  processed_path: "./data/processed"
+  sampling_rate: 16000   # Standard for speech processing
+  duration: 4.0          # Clip audio to 4 seconds
+  batch_size: 32
+  num_workers: 4
+
+dqlct:
+  window_size: 512       # Frame size for the transform
+  hop_length: 256        # Overlap
+  alpha: [0.5, 0.5, 0.5] # Example parameters for the transformation matrix
+
+training:
+  epochs: 50
+  learning_rate: 0.001
+  device: "cuda"         
