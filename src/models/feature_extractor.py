@@ -52,7 +52,7 @@ for _k in _to_purge:
 # Import ONLY the three needed modules — flat, never via package path.
 # Do NOT import complete_pipeline or spectral_distance (pull in matplotlib).
 from quaternion_core   import Quaternion, create_quaternion_array
-from holistic_features import HilbertQuaternionFeatures
+from pd_feature_extractor import PDQuaternionFeatures
 from dqlct_transform   import QLCT1D, create_standard_matrices
 
 
@@ -76,7 +76,7 @@ MATRIX_TYPE = 'Fractional_45deg'
 _matrices = create_standard_matrices()
 _a, _b, _c, _d = _matrices[MATRIX_TYPE]
 
-_hilbert = HilbertQuaternionFeatures(
+_pd_features = PDQuaternionFeatures(
     sr=TARGET_SR,
     frame_length=FRAME_LEN,
     hop_length=HOP_LEN
@@ -126,7 +126,7 @@ def _to_quaternion_signal(audio: np.ndarray) -> list:
     Returns list of Quaternion objects: q[n] = w + xi + 0j + 0k
     Zero logic change.
     """
-    return _hilbert.audio_to_quaternion_signal(audio, verbose=False)
+    return _pd_features.audio_to_quaternion_signal(audio, verbose=False)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
